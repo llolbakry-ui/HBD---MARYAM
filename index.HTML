@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> H B D Maryooomaa 🎂</title>
+    <!-- خط عربي أنيق -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
+    <!-- مكتبة الألعاب النارية الاحتفالية Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --card-bg: rgba(20, 27, 45, 0.75);
+            --primary: #ec4899;
+            --secondary: #8b5cf6;
+            --accent: #f59e0b;
+            --text-color: #f8fafc;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(236, 72, 153, 0.25) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(139, 92, 246, 0.25) 0px, transparent 50%),
+                radial-gradient(at 50% 50%, rgba(245, 158, 11, 0.1) 0px, transparent 50%);
+            color: var(--text-color);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* بلونات طائرة في الخلفية */
+        .balloon {
+            position: absolute;
+            bottom: -120px;
+            opacity: 0.6;
+            border-radius: 50%;
+            animation: floatUp 12s infinite linear;
+            z-index: 0;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0.8; }
+            100% { transform: translateY(-120vh) rotate(360deg); opacity: 0; }
+        }
+
+        .container {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            max-width: 620px;
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 28px;
+            padding: 40px 25px;
+            text-align: center;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7);
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* إطار صورة مريم */
+        .profile-wrapper {
+            position: relative;
+            width: 160px;
+            height: 160px;
+            margin: 0 auto 20px auto;
+        }
+
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--primary);
+            box-shadow: 0 0 30px rgba(236, 72, 153, 0.6);
+            animation: pulse 2.5s infinite alternate;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 15px rgba(236, 72, 153, 0.4); transform: scale(1); }
+            100% { box-shadow: 0 0 35px rgba(236, 72, 153, 0.9), 0 0 10px rgba(245, 158, 11, 0.6); transform: scale(1.04); }
+        }
+
+        .badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            padding: 6px 20px;
+            border-radius: 50px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            box-shadow: 0 4px 15px rgba(236, 72, 153, 0.4);
+        }
+
+        h1 {
+            font-size: 2.6rem;
+            font-weight: 900;
+            margin-bottom: 6px;
+            background: linear-gradient(135deg, #ffffff, #f472b6, #fbbf24);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        p.subtitle {
+            font-size: 1.3rem;
+            color: #cbd5e1;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+
+        .timer-title {
+            font-size: 1.1rem;
+            color: #94a3b8;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        /* تصميم كروت العداد */
+        .timer-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .time-box {
+            background: rgba(15, 23, 42, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 20px;
+            padding: 16px 10px;
+            flex: 1;
+            max-width: 110px;
+            box-shadow: inset 0 2px 6px rgba(0,0,0,0.6);
+        }
+
+        .time-value {
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: #f43f5e;
+            line-height: 1.1;
+            text-shadow: 0 0 10px rgba(244, 63, 94, 0.4);
+        }
+
+        .time-label {
+            font-size: 0.85rem;
+            color: #94a3b8;
+            margin-top: 6px;
+        }
+
+        /* كارت التهنئة */
+        .wishes-card {
+            background: rgba(255, 255, 255, 0.04);
+            border-right: 4px solid var(--primary);
+            border-radius: 16px;
+            padding: 22px;
+            text-align: right;
+            margin-bottom: 25px;
+            line-height: 1.8;
+            color: #e2e8f0;
+        }
+
+        .wishes-card h3 {
+            color: var(--accent);
+            margin-bottom: 8px;
+            font-size: 1.3rem;
+        }
+
+        /* الأزرار والتنبيهات */
+        .button-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .btn-celebrate {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.15rem;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(236, 72, 153, 0.5);
+            width: 100%;
+            max-width: 320px;
+        }
+
+        .btn-celebrate:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 12px 35px rgba(236, 72, 153, 0.7);
+        }
+
+        .audio-status {
+            font-size: 0.85rem;
+            color: #a855f7;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 2rem; }
+            .time-value { font-size: 1.6rem; }
+            .profile-wrapper { width: 135px; height: 135px; }
+            .container { padding: 30px 18px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- رابط أغنية Stevie Wonder - Happy Birthday -->
+    <audio id="bg-music" src="https://divineflaver.com.ng/wp-content/uploads/2024/09/Stevie_Wonder_Happy_Birthday128k.mp3" preload="auto"></audio>
+
+    <!-- عناصر بلونات خلفية متحركة -->
+    <div class="balloon" style="left: 8%; width: 45px; height: 55px; background: #ec4899; animation-duration: 9s;"></div>
+    <div class="balloon" style="left: 28%; width: 55px; height: 65px; background: #8b5cf6; animation-duration: 13s; animation-delay: 2s;"></div>
+    <div class="balloon" style="left: 68%; width: 40px; height: 50px; background: #f59e0b; animation-duration: 10s; animation-delay: 1s;"></div>
+    <div class="balloon" style="left: 88%; width: 50px; height: 60px; background: #3b82f6; animation-duration: 11s; animation-delay: 3s;"></div>
+
+    <div class="container">
+        <!-- صورة مريم محملة مباشرة -->
+        <div class="profile-wrapper">
+            <img src="maryam.jpg.jpeg" alt="Maryam Touhami" class="profile-img">
+        </div>
+
+        <span class="badge"> Happy Birthday! Time for a special celebration 🎂</span>
+        <h1>Happy Birthday</h1>
+        <p class="subtitle">✨ Maryoomaa ✨</p>
+
+        <div class="timer-title" id="timer-status">متبقي على بداية عيد الميلاد:</div>
+        
+        <div class="timer-container">
+            <div class="time-box">
+                <div class="time-value" id="hours">00</div>
+                <div class="time-label">ساعة</div>
+            </div>
+            <div class="time-box">
+                <div class="time-value" id="minutes">00</div>
+                <div class="time-label">دقيقة</div>
+            </div>
+            <div class="time-box">
+                <div class="time-value" id="seconds">00</div>
+                <div class="time-label">ثانية</div>
+            </div>
+        </div>
+
+        <div class="wishes-card">
+            <h3>كل سنة وأنتِ طيبة وناجحة 🎈</h3>
+            <p>
+                عقبال سنين كتير جاية كلها خير ونجاح وتحقيق لكل الأهداف والأحلام. يارب تكون سنة جديدة مميزة وتتحقق فيها كل الحاجات الحلوة اللي بتتمنيها!
+            </p>
+        </div>
+
+        <div class="button-group">
+            <button class="btn-celebrate" onclick="triggerMassiveCelebration()">احتفل الآن 🎉</button>
+            <div class="audio-status" id="audio-note">🎵 اضغط في أي مكان بالشاشة لتجهيز الموسيقى للعمل عند 12:00 تلقائياً</div>
+        </div>
+    </div>
+
+    <script>
+        let hasCelebrated = false;
+        let isAudioReady = false;
+        const bgMusic = document.getElementById('bg-music');
+
+        // تجهيز الصوت وتخطي قيود المتصفح بمجرد أي ضغطة على الشاشة
+        function enableAudioPermission() {
+            if (isAudioReady) return;
+            bgMusic.play().then(() => {
+                bgMusic.pause();
+                bgMusic.currentTime = 0;
+                isAudioReady = true;
+                document.getElementById('audio-note').innerText = "✅ الصوت جاهز للعمل تلقائياً عند الساعة 12!";
+                document.getElementById('audio-note').style.color = "#4ade80";
+            }).catch(() => {});
+        }
+
+        document.body.addEventListener('click', enableAudioPermission, { once: true });
+
+        function updateCountdown() {
+            const now = new Date();
+            // تحديد بداية يوم غد (الساعة 12:00 AM منتصف الليل)
+            const targetDate = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 0, 0, 0);
+            
+            const currentTime = now.getTime();
+            const difference = targetDate - currentTime;
+
+            if (difference <= 0) {
+                document.getElementById('hours').innerText = "00";
+                document.getElementById('minutes').innerText = "00";
+                document.getElementById('seconds').innerText = "00";
+                document.getElementById('timer-status').innerText = "🎉 بدأ يوم ميلادك الآن! كل سنة وأنتِ طيبة يا مريم 🎉";
+                
+                // تشغيل الألعاب النارية والأغنية تلقائياً عند الساعة 12
+                if (!hasCelebrated) {
+                    triggerMassiveCelebration();
+                    hasCelebrated = true;
+                }
+                return;
+            }
+
+            const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+            document.getElementById('hours').innerText = hours < 10 ? '0' + hours : hours;
+            document.getElementById('minutes').innerText = minutes < 10 ? '0' + minutes : minutes;
+            document.getElementById('seconds').innerText = seconds < 10 ? '0' + seconds : seconds;
+        }
+
+        // دالة إطلاق الألعاب النارية وتغيل الأغنية
+        function triggerMassiveCelebration() {
+            if (bgMusic) {
+                bgMusic.play().catch(e => console.log("Audio requires click permission first"));
+            }
+
+            if (typeof confetti !== 'function') return;
+
+            const duration = 10 * 1000;
+            const animationEnd = Date.now() + duration;
+
+            const interval = setInterval(function() {
+                const timeLeft = animationEnd - Date.now();
+
+                if (timeLeft <= 0) {
+                    return clearInterval(interval);
+                }
+
+                confetti({
+                    particleCount: 70,
+                    startVelocity: 35,
+                    spread: 360,
+                    ticks: 70,
+                    origin: { x: Math.random(), y: Math.random() - 0.2 }
+                });
+            }, 200);
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+    </script>
+</body>
+</html>
